@@ -1,0 +1,48 @@
+name: Build & Deploy React Vite to Hostinger (password SSH)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      # Optional: clear target folder first (حذف الملفات القديمة)
+      - name: Remove old files on remote (via SSH)
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            # احذر: هذا سيمسح كل الملفات داخل public_html
+            rm -rf /public_html/*
+
+      # Upload the new build folder (dist)
+      - name: Upload dist to Hostinger via SCP (password)
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          source: "dist/*"
+          target: "/public_html"
