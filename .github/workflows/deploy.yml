@@ -10,33 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ نسخ الكود من GitHub
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ إعداد Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # 3️⃣ تثبيت الحزم
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Build المشروع
       - name: Build project
         run: npm run build
 
-      # 5️⃣ رفع ملفات dist على Hostinger باستخدام FTP
+      # رفع ملفات dist على Hostinger باستخدام FTP
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local-dir: ./dist
+          local-dir: ./dist/
           server-dir: /public_html
-          # Optional: حذف الملفات القديمة قبل الرفع
-          dry-run: false
-          git-ftp-args: --insecure --delete
+          dangerous-clean-slate: true  # يمسح كل الملفات القديمة قبل الرفع
