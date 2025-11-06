@@ -24,7 +24,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # رفع ملفات dist على Hostinger باستخدام FTP
+      # رفع ملفات dist على Hostinger باستخدم FTP
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
@@ -32,5 +32,5 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/
-          server-dir: /public_html/   # لازم الشرطة في الآخر
+          server-dir: /public_html/  # لازم الشرطة في الآخر
           dangerous-clean-slate: true
