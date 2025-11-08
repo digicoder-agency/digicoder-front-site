@@ -353,10 +353,10 @@ export default function App() {
                   <div>
                     <div className="font-semibold">Email</div>
                     <a
-                      href="mailto:contact@digicoder.sa"
+                      href="mailto:support@digicoder.sa"
                       className="hover:underline"
                     >
-                      contact@digicoder.sa
+                      support@digicoder.sa
                     </a>
                   </div>
                   <div>
