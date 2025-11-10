@@ -469,10 +469,10 @@ export default function App() {
                   <div>
                     <div className="font-semibold">Email</div>
                     <a
-                      href="mailto:support@digicoder.sa"
+                      href="mailto:support@digicoder.agency"
                       className="hover:underline"
                     >
-                      support@digicoder.sa
+                      support@digicoder.agency
                     </a>
                   </div>
                   <div>
@@ -530,13 +530,13 @@ export default function App() {
               <div className="mt-4 text-sm text-slate-400 space-y-1">
                 <a
                   href="mailto:support@digicoder.agency"
-                  className="block hover:text-blue-500 transition-colors"
+                  className="block hover:text-blue-500 transition-colors hover:underline"
                 >
                   support@digicoder.agency
                 </a>
                 <a
                   href="tel:+201556751214"
-                  className="block hover:text-blue-500 transition-colors"
+                  className="block hover:text-blue-500 transition-colors hover:underline"
                 >
                   +20 155 675 1214
                 </a>
