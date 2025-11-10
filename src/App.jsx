@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaCode, FaMobileAlt, FaPalette, FaServer, FaCheckCircle } from 'react-icons/fa'
+import { FaCode, FaMobileAlt, FaPalette, FaServer, FaCheckCircle, FaRocket, FaBuilding, FaGem, FaCheck } from 'react-icons/fa'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -61,7 +61,62 @@ export default function App() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-
+  const packages = [
+    {
+      title: "Starter",
+      icon: <FaRocket />,
+      price: "1,000 – 2,000 SAR",
+      description: "For small projects and simple stores",
+      features: [
+        "3‑5 static pages website",
+        "Responsive design",
+        "Contact form",
+        "Social media links"
+      ],
+      duration: "7‑10 days"
+    },
+    {
+      title: "Business",
+      icon: <FaBuilding />,
+      price: "3,000 – 5,000 SAR",
+      description: "Dynamic websites for SMEs",
+      features: [
+        "5‑10 dynamic pages",
+        "CMS dashboard",
+        "Basic SEO",
+        "Contact + Google Maps",
+        "Email / Payment integration"
+      ],
+      duration: "~15 days"
+    },
+    {
+      title: "App Starter",
+      icon: <FaMobileAlt />,
+      price: "6,000 – 10,000 SAR",
+      description: "For MVP or initial mobile apps",
+      features: [
+        "Flutter / React Native app",
+        "3‑4 main screens",
+        "iOS & Android support",
+        "Publish on Play Store & App Store",
+        "Simple CMS"
+      ],
+      duration: "3‑4 weeks"
+    },
+    {
+      title: "Premium",
+      icon: <FaGem />,
+      price: "10,000 – 15,000 SAR",
+      description: "Complete solution for large businesses",
+      features: [
+        "Dynamic website + full mobile app",
+        "Advanced dashboard + analytics",
+        "1‑3 months maintenance & support",
+        "Custom integrations if needed"
+      ],
+      duration: "6‑8 weeks"
+    }
+  ];
 
   return (
 
@@ -82,6 +137,7 @@ export default function App() {
               <a href="#" onClick={() => scrollToSection('#about')} className="hover:text-slate-900 transition">About</a>
               <a href="#" onClick={() => scrollToSection('#services')} className="hover:text-slate-900 transition">Services</a>
               <a href="#" onClick={() => scrollToSection('#partners')} className="hover:text-slate-900 transition">Partners</a>
+              <a href="#" onClick={() => scrollToSection('#packages',50)} className="hover:text-slate-900 transition">Packages</a>
               <a href="#" onClick={() => scrollToSection('#contact')} className="hover:text-slate-900 transition">Contact</a>
             </nav>
             <div className="flex items-center gap-4">
@@ -117,6 +173,7 @@ export default function App() {
             <a href="#" onClick={() => { scrollToSection('#about'); setIsOpen(false); }} className="text-center text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">About</a>
             <a href="#" onClick={() => { scrollToSection('#services'); setIsOpen(false); }} className="text-center text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Services</a>
             <a href="#" onClick={() => { scrollToSection('#partners'); setIsOpen(false); }} className="text-center text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Partners</a>
+            <a href="#" onClick={() => { scrollToSection('#packages',50); setIsOpen(false); }} className="text-center text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Packages</a>
             <a href="#" onClick={() => { scrollToSection('#contact'); setIsOpen(false); }} className="text-center text-lg font-semibold text-slate-900 hover:text-slate-700 transition-colors">Contact</a>
 
             <a href="#" onClick={() => { scrollToSection('#contact'); setIsOpen(false); }} className="mt-4 px-6 py-3 rounded-2xl font-medium text-white text-center mx-auto" style={{ background: MAIN, minWidth: '140px', boxShadow: '0 8px 20px rgba(0,0,0,0.2)' }}>
@@ -340,6 +397,65 @@ export default function App() {
             </Swiper>
           </div>
         </section>
+
+
+
+
+        {/* ====== PACKAGES ====== */}
+        <section id="packages" className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-3xl lg:text-4xl font-bold text-slate-900 text-center">Our Packages</motion.h3>
+            <p className="text-center mt-4 text-slate-600 max-w-3xl mx-auto">Premium solutions tailored for businesses of all sizes.</p>
+
+
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {packages.map((pkg, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -6 }}
+                  className="bg-white rounded-2xl shadow-lg p-8 flex flex-col transition-all duration-300 hover:shadow-2xl"
+                >
+                  {/* Price */}
+                  <div className="text-center mb-6">
+                    <span className="inline-block px-6 py-3 font-bold text-xl rounded-full bg-gray-800 text-white shadow">
+                      {pkg.price}
+                    </span>
+                  </div>
+
+                  {/* Icon */}
+                  <div className="text-5xl text-gray-700 mb-4 flex justify-center">{pkg.icon}</div>
+
+                  {/* Title */}
+                  <h4 className="text-2xl font-extrabold mb-2 text-center text-gray-800">{pkg.title}</h4>
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-600 mb-6 text-center">{pkg.description}</p>
+
+                  {/* Features */}
+                  <ul className="text-sm text-gray-700 mb-6 space-y-2">
+                    {pkg.features.map((f, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <FaCheck className="text-gray-600" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Duration */}
+                  <p className="text-sm text-gray-500 mt-auto text-center font-medium">Duration: {pkg.duration}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+
+
+
 
         {/* ====== CONTACT ====== */}
         <section id="contact" className="py-20">
